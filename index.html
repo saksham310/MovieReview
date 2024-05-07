@@ -4,16 +4,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cine Scope</title>
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <header class="header">
-        <nav class="header__nav">
-            <h1 class="header__title">Cine Scope</h1>
-            <h2>Saksham Sharma: 2330544</h2>
+        <nav class="header-nav">
+            <h1>Cine Scope</h1>
+            <button class="active btn btn-nav" id="nav-btn" onclick="toggleVisibility()">ADD NEW MOVIES</button>
         </nav>
     </header>
+    <main class="container">
+        <div class="container-form" id="movie-form">
+            <form id="movie">
+                <div class="form-title">
+                    <h2>Movie Details</h2>
+                    <button id="close-btn" onclick="toggleVisibility()">
+                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24"
+                            viewBox="0,0,256,256" style="fill:#000000;">
+                            <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+                                stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                                font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                                style="mix-blend-mode: normal">
+                                <g transform="scale(10.66667,10.66667)">
+                                    <path
+                                        d="M4.70703,3.29297l-1.41406,1.41406l7.29297,7.29297l-7.29297,7.29297l1.41406,1.41406l7.29297,-7.29297l7.29297,7.29297l1.41406,-1.41406l-7.29297,-7.29297l7.29297,-7.29297l-1.41406,-1.41406l-7.29297,7.29297z">
+                                    </path>
+                                </g>
+                            </g>
+                        </svg>
+                    </button>
+                </div>
+                <label for="name">Movie Name</label>
+                <input type="text" id="name" placeholder="Movie Name">
+                <label for="director">Director's Name</label>
+                <input type="text" id="director" placeholder="Director">
+                <label for="release">Release Date</label>
+                <input type="date" id="release">
+                <label for="ratings">Ratings</label>
+                <select name="ratings" id="ratings">
+                    <option value="1">1/5</option>
+                    <option value="2">2/5</option>
+                    <option value="3">3/5</option>
+                    <option value="4">4/5</option>
+                    <option value="5">5/5</option>
+                </select>
+                <button class="btn" id="form-btn">Add</button>
+            </form>
+        </div>
+        <div class="container-table">
+            <table>
+                <thead>
+                    <th>Movie Name</th>
+                    <th>Release</th>
+                    <th>Director</th>
+                    <th>Ratings</th>
+                    <th>Action</th>
+                </thead>
+                <tbody id="movieList"></tbody>
+            </table>
+        </div>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="module" src="script.js"></script>
+    <script>
+
+        var addBtn = document.getElementById('nav-btn');
+        var closeBtn = document.getElementById('close-btn');
+        var form = document.getElementById('movie-form');
+
+        function toggleVisibility() {
+            addBtn.classList.toggle('active');
+            form.classList.toggle('active')
+        }
+    </script>
 </body>
 
 </html>
