@@ -8,7 +8,9 @@ import {
     query,
     collection,
     orderBy,
-    addDoc
+    addDoc,
+    deleteDoc,
+    doc
 } from 'https://www.gstatic.com/firebasejs/9.18.0/firebase-firestore.js'
 
 // web app's Firebase configuration
@@ -38,15 +40,15 @@ const unsubscribe = onSnapshot(q, (snapshot) => {
         rows += '<td>' + doc.data().Release + '</td>';
         rows += '<td>' + doc.data().Director + '</td>';
         rows += '<td>' + doc.data().Ratings + '/5</td>';
-        rows += '<td><button class="table-btn" onclick="editBook(\'' + doc.id + '\')">Edit</button>' +
-            '<button class="table-btn delete" onclick="deleteBook(\'' + doc.id + '\')">Delete</button></td>';
+        rows += '<td><button class="table-btn edit" data-id="' + doc.id + '">Edit</button>' +
+            '<button class="table-btn delete" data-id="' + doc.id + '">Delete</button></td>';
 
         rows += '</tr>';
     })
     $('#movieList').append(rows);
 })
 
-// Adding new data to the db
+// Add new data to the db
 $('#form-btn').click(function (e) {
     e.preventDefault(); // Prevent default form submission
     const docRef = addDoc(collection(db, "MovieApp"), {
@@ -61,5 +63,27 @@ $('#form-btn').click(function (e) {
         console.error("Error adding document: ", error);
     });
 })
+
+$('#movieList').on('click', '.delete', function () {
+    // Get the movie ID from the data-id attribute of the delete button
+    var movieId = $(this).data('id');
+
+    // Call the deleteBook function 
+    deleteBook(movieId);
+});
+
+// Delete function to delete a movie from Firestore
+function deleteBook(id) {
+    if (confirm("Are you sure you want to delete this movie?")) {
+        const movieDocRef = doc(db, "MovieApp", id);
+        deleteDoc(movieDocRef)
+            .then(() => {
+                console.log("Document successfully deleted!");
+            })
+            .catch((error) => {
+                console.error("Error removing document: ", error);
+            });
+    }
+}
 
 
