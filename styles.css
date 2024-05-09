@@ -1,0 +1,116 @@
+:root {
+  --Primary: #151515;
+  --Secondary: #262a2c;
+  --Accent: #e90b0b;
+  --Accent-two: rgb(255, 128, 0);
+  --Text: #ffffff;
+}
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  background-color: var(--Secondary);
+}
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+}
+.nav {
+  display: flex;
+  padding: 0.3em;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2em;
+  background-color: var(--Primary);
+  color: var(--Text);
+}
+main {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.grids {
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 0.5fr);
+}
+.card {
+  background-color: var(--Primary);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.599);
+  display: flex;
+  width: 70%;
+  flex-direction: column;
+  color: var(--Text);
+  border-radius: 8px;
+  margin: 0.7em;
+  padding: 10px;
+  gap: 0.5em;
+}
+.btn-container {
+  display: flex;
+  justify-content: space-between;
+}
+button {
+  width: 10em;
+  text-align: center;
+  padding: 0.6em;
+  background-color: none;
+  border: none;
+  border-radius: 4px;
+}
+.delete {
+  background-color: var(--Accent);
+  color: var(--Text);
+}
+.container-form {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  margin: 2em;
+}
+.container-form form {
+  width: 50%;
+  background-color: var(--Primary);
+  border: 1px solid white;
+  color: var(--Text);
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  margin: 3px;
+}
+
+.container-form label {
+  margin-bottom: 0.5em;
+}
+
+.container-form input,
+.container-form select {
+  margin-bottom: 1em;
+  padding: 5px;
+}
+.form-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.form-title button {
+  border: none;
+  background-color: var(--Accent);
+}
+
+button:hover {
+  cursor: pointer;
+}
+.btn {
+  background-color: var(--Accent-two);
+}
+.btn-nav {
+  display: none;
+  background-color: var(--Accent-two);
+}
+.active {
+  display: flex;
+}

@@ -5,17 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <header class="header">
-        <nav class="header-nav">
-            <h1>Cine Scope</h1>
-            <button class="active btn btn-nav" id="nav-btn" onclick="toggleVisibility()">ADD NEW MOVIES</button>
-        </nav>
-    </header>
-    <main class="container">
+    <nav class="nav">
+        <h1>Saksham Sharma</h1>
+        <div class="buttons">
+            <div class="sortBy">
+                <label for="sort">Sort By:</label>
+                <select name="sort" id="sort">
+                    <option value="Name">Name</option>
+                    <option value="Release">Release</option>
+                    <option value="Ratings">Ratings</option>
+                    <option value="Director">Director</option>
+                </select>
+            </div>
+            <button class="active btn btn-nav" id="nav-btn" onclick="toggleVisibility()">Add Movie</button>
+        </div>
+    </nav>
+
+    <main>
+
         <div class="container-form" id="movie-form">
             <form id="movie">
                 <div class="form-title">
@@ -53,21 +64,12 @@
                 <button class="btn" id="form-btn">Add</button>
             </form>
         </div>
-        <div class="container-table">
-            <table>
-                <thead>
-                    <th>Movie Name</th>
-                    <th>Release</th>
-                    <th>Director</th>
-                    <th>Ratings</th>
-                    <th>Action</th>
-                </thead>
-                <tbody id="movieList"></tbody>
-            </table>
+        <div class="grids" id="grids">
         </div>
     </main>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="module" src="script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js">
+    </script>
+    <script type="module" src="scripts.js"></script>
     <script>
 
         var addBtn = document.getElementById('nav-btn');
@@ -78,7 +80,9 @@
             addBtn.classList.toggle('active');
             form.classList.toggle('active')
         }
+
     </script>
 </body>
+
 
 </html>
