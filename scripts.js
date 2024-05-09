@@ -2,7 +2,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-app.js";
 import {
     getFirestore, onSnapshot, query, collection, orderBy, addDoc,
-    deleteDoc, doc
+    deleteDoc, doc, getDoc, updateDoc
 } from 'https://www.gstatic.com/firebasejs/9.18.0/firebase-firestore.js'
 
 // Web app's Firebase configuration
@@ -20,16 +20,16 @@ const db = getFirestore(app);
 
 // Ensure DOM content is loaded before accessing DOM elements
 $(document).ready(function () {
-    let sortValue = $('#sort').val(); // Initialize sortValue after DOM is loaded
+    let sortValue = $('#sort').val(); // Initialize sortValue 
     let q = query(collection(db, "MovieApp"), orderBy(sortValue));
     load()
-
+    console.log($('#form-btn').val());
     $('#sort').on('change', function () {
         sortValue = $(this).val();
         q = query(collection(db, "MovieApp"), orderBy(sortValue));
         load();
     })
-
+    // Display the data in firestore
     function load() {
         onSnapshot(q, (snapshot) => {
             $('#grids').empty();
@@ -51,9 +51,17 @@ $(document).ready(function () {
             });
         })
     };
-    // Add new data to the db
+    // Handle add/update of movies
     $('#form-btn').click(function (e) {
         e.preventDefault(); // Prevent default form submission
+        if ($('#form-btn').val() == 'Add') {
+            add();
+            return
+        }
+        updateReview();
+
+    })
+    function add() {
         const docRef = addDoc(collection(db, "MovieApp"), {
             Director: $("#director").val(),
             Name: $("#name").val(),
@@ -65,18 +73,18 @@ $(document).ready(function () {
         }).catch((error) => {
             console.error("Error adding document: ", error);
         });
-    })
-
+    }
 
     $('#grids').on('click', '.delete', function () {
         // Get the movie ID from the data-id attribute of the delete button
         var movieId = $(this).data('id');
 
         // Call the deleteBook function 
-        deleteBook(movieId);
+        deleteReview(movieId);
     });
 
-    function deleteBook(id) {
+
+    function deleteReview(id) {
         if (confirm("Are you sure you want to delete this movie?")) {
             const movieDocRef = doc(db, "MovieApp", id);
             deleteDoc(movieDocRef)
@@ -88,5 +96,47 @@ $(document).ready(function () {
                 });
         }
     }
+    $('#grids').on('click', '.edit', function () {
+        // Get the movie ID from the data-id attribute of the delete button
+        var movieId = $(this).data('id');
+        editReview(movieId);
+    });
+    function editReview(id) {
+        const docRef = doc(db, "MovieApp", id);
+        getDoc(docRef).then((doc) => {
+
+            const data = doc.data();
+            $('#name').val(data.Name);
+            $('#director').val(data.Director);
+            $('#release').val(data.Release);
+            $('#ratings').val(data.Ratings);
+            $('#form-btn').val(id).text('Update');
+            toggleVisibility()
+        }).catch((error) => {
+            console.error("Error getting document:", error);
+        });
+    }
+
+    function updateReview() {
+        const docRef = doc(db, "MovieApp", $('#form-btn').val());
+        const name = $('#name').val();
+        const director = $('#director').val();
+        const release = $('#release').val();
+        const ratings = $('#ratings').val();
+        updateDoc(docRef, {
+            Name: name,
+            Director: director,
+            Release: release,
+            Ratings: ratings
+        }).then(() => {
+            console.log("Document updated successfully");
+            confirm("Updated Successfully");
+            $('#movie')[0].reset(); // Reset the form after successful submission
+
+        }).catch((error) => {
+            console.error("Error updating document: ", error);
+        });
+    }
+
 }
 );

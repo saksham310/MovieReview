@@ -110,6 +110,7 @@ button:hover {
 .btn-nav {
   display: none;
   background-color: var(--Accent-two);
+  color: var(--Text);
 }
 .active {
   display: flex;
