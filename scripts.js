@@ -31,6 +31,7 @@ $(document).ready(function () {
     })
     // Display the data in firestore
     function load() {
+
         onSnapshot(q, (snapshot) => {
             $('#grids').empty();
             snapshot.forEach((doc) => {
@@ -58,7 +59,7 @@ $(document).ready(function () {
             add();
             return
         }
-        updateReview();
+        updateReview(e);
 
     })
     function add() {
@@ -96,12 +97,12 @@ $(document).ready(function () {
                 });
         }
     }
-    $('#grids').on('click', '.edit', function () {
+    $('#grids').on('click', '.edit', function (event) {
         // Get the movie ID from the data-id attribute of the delete button
         var movieId = $(this).data('id');
-        editReview(movieId);
+        editReview(movieId, event);
     });
-    function editReview(id) {
+    function editReview(id, e) {
         const docRef = doc(db, "MovieApp", id);
         getDoc(docRef).then((doc) => {
 
@@ -111,13 +112,13 @@ $(document).ready(function () {
             $('#release').val(data.Release);
             $('#ratings').val(data.Ratings);
             $('#form-btn').val(id).text('Update');
-            toggleVisibility()
+            toggleVisibility(e)
         }).catch((error) => {
             console.error("Error getting document:", error);
         });
     }
 
-    function updateReview() {
+    function updateReview(e) {
         const docRef = doc(db, "MovieApp", $('#form-btn').val());
         const name = $('#name').val();
         const director = $('#director').val();
@@ -131,7 +132,10 @@ $(document).ready(function () {
         }).then(() => {
             console.log("Document updated successfully");
             confirm("Updated Successfully");
-            $('#movie')[0].reset(); // Reset the form after successful submission
+            $('#movie')[0].reset();
+            // Reset the form after successful submission
+
+            toggleVisibility(e)
 
         }).catch((error) => {
             console.error("Error updating document: ", error);

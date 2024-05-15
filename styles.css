@@ -1,15 +1,18 @@
 :root {
-  --Primary: #151515;
-  --Secondary: #262a2c;
-  --Accent: #e90b0b;
-  --Accent-two: rgb(255, 128, 0);
-  --Text: #ffffff;
+  --Secondary: #ffffff;
+  --Primary: #e0f5ffdc;
+  --Accent: #b10404;
+  --Accent-two: rgb(0, 0, 0);
+  --Text: #000000;
 }
 body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  background-color: var(--Secondary);
+  background: url("https://images.unsplash.com/photo-1440404653325-ab127d49abc1?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }
 .buttons {
   display: flex;
@@ -23,8 +26,7 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2em;
-  background-color: var(--Primary);
-  color: var(--Text);
+  color: white;
 }
 main {
   height: 100vh;
@@ -38,7 +40,7 @@ main {
   grid-template-columns: repeat(3, 0.5fr);
 }
 .card {
-  background-color: var(--Primary);
+  background-color: var(--Secondary);
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.599);
   display: flex;
   width: 70%;
@@ -63,7 +65,7 @@ button {
 }
 .delete {
   background-color: var(--Accent);
-  color: var(--Text);
+  color: #ffffff;
 }
 .container-form {
   display: none;
@@ -73,9 +75,9 @@ button {
 }
 .container-form form {
   width: 50%;
-  background-color: var(--Primary);
+  background-color: rgb(79, 78, 78);
   border: 1px solid white;
-  color: var(--Text);
+  color: white;
   padding: 2em;
   display: flex;
   flex-direction: column;
@@ -98,19 +100,21 @@ button {
 }
 .form-title button {
   border: none;
-  background-color: var(--Accent);
+  background-color: rgb(79, 78, 78);
+  color: #ffffff;
 }
 
 button:hover {
   cursor: pointer;
 }
 .btn {
-  background-color: var(--Accent-two);
+  background-color: white;
+  color: #050505;
 }
 .btn-nav {
   display: none;
-  background-color: var(--Accent-two);
-  color: var(--Text);
+  background-color: #930303;
+  color: #ffffff;
 }
 .active {
   display: flex;

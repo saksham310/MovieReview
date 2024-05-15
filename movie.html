@@ -21,7 +21,8 @@
                     <option value="Director">Director</option>
                 </select>
             </div>
-            <button class="active btn btn-nav" id="nav-btn" onclick="toggleVisibility(event)">Add Movie</button>
+            <button class="active btn btn-nav" id="nav-btn" onclick="toggleVisibility(event);changeVal()">Add
+                Movie</button>
         </div>
     </nav>
 
@@ -31,7 +32,7 @@
             <form id="movie">
                 <div class="form-title">
                     <h2>Movie Details</h2>
-                    <button id="close-btn" onclick="toggleVisibility(event)">
+                    <button id="close-btn" onclick="toggleVisibility(event);resetForm()">
                         <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24"
                             viewBox="0,0,256,256" style="fill:#000000;">
                             <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
@@ -80,6 +81,14 @@
             e.preventDefault();
             addBtn.classList.toggle('active');
             form.classList.toggle('active')
+        }
+        function changeVal() {
+            $('#form-btn').val('Add').text('Add');
+        }
+        function resetForm() {
+            $('#movie')[0].reset();
+            // Reset the form after successful submission
+
         }
 
     </script>
